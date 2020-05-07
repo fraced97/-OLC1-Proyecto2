@@ -1,0 +1,79 @@
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <script src="./css/lib/codemirror.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/lib/codemirror.css">
+        <link rel="stylesheet" type="text/css" href="./css/the-matrix.css">
+        <script src="./js/mode/javascript/javascript.js"></script>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">PROYECTO 2</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarColor02">
+    
+    
+            </div>
+        </nav>
+        <table class="table table-hover">
+            <tr>
+                <td>
+                    <div class="jumbotron">
+                        <Filename to Save As:>
+                            <input id="inputFileNameToSaveAs"></input>
+                            <button onclick="saveTextAsFile()">Save Text to File</button>
+                            <input id="rToken"></input>
+                            <input id="rErrores"></input>
+                    </div>
+                    <div class="jumbotron">
+                        <input type="file" id="fileToLoad"></input>
+                        <button onclick="loadFileAsText()">Cargar Archivo</button>
+                        <textarea class="form-control" id="inputTextToSave" rows="15" style="margin-top: 0px; margin-bottom: 0px;"></textarea>
+                        
+                        <br>
+    
+                        <button type="button" class="btn btn-info" onclick="quitarValor()">Analizar</button>
+    
+                        <button type="button" class="btn btn-info" id="descargar" onclick="pasarValor()"> Descargar</button>
+                        <button type="button" class="btn btn-info" id="Errores" onclick="Conn()"> Errores</button>
+                    </div>
+                    <div class="jumbotron">
+                        <textarea class="form-control" id="segundoTxt" rows="15" style="margin-top: 0px; margin-bottom: 0px;"></textarea>
+                    </div>
+                    <div class="jumbotron">
+                        <iframe src="http://localhost:8000/prueba"marginwidth="0" marginheight="0" name="ventana_iframe" scrolling="no" border="0" 
+                        frameborder="0" width="800" height="600"></iframe>
+
+                        <a href="http://localhost:8000/prueba">PRUEBAAAAA</a>
+                    </div>
+                </td>
+               
+            </tr>
+
+        </table>
+    
+        </div>
+        <script>const txtCode = CodeMirror.fromTextArea(inputTextToSave, {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "the-matrix"
+        });</script>
+        <script src="./js/prueba/CargarArchivo.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/jquery.min.js"></script>
+        
+        
+
+    </body>
+
+    
+    </html>  
+
+
+
+    

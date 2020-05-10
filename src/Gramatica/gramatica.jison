@@ -23,9 +23,9 @@
 [ \r\t]+            {}
 \n                  {}
 
-"//".*   return 'COMENTARIO';
+"//".*   {};
 
-[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]    return 'COMENTARIOMULTI';
+[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]    {};
 
 "int"               return 'INT';
 "double"            return 'DOUBLE';
@@ -133,7 +133,7 @@
 %% /* Definición de la gramática */
 
 INICIO : IMPORTSYCLASES EOF {$$=$1; return $$;} 
-        |error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }
+        |error { console.error('Este es un error sintáctico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + this._$.first_column); }  
 ;
 
 INSTRUCCIONES : INSTRUCCIONES INSTRUCCION 
@@ -146,8 +146,6 @@ INSTRUCCION : PRINT
             | FOR2
             | DO2
             | SWITCH2
-            |COMENTARIO
-            |COMENTARIOMULTI
 ;
 
 
@@ -177,8 +175,6 @@ INSTRUCCIONESDENTROCLASE : INSTRUCCIONESDENTROCLASE INSTRUCCIONDENTROCLASE {$$=$
 
 INSTRUCCIONDENTROCLASE : METODO2 {$$ = $1}
             | FUNCION2 {$$ = $1}
-            | COMENTARIOMULTI 
-            | COMENTARIO
             | DECLARACION {$$ = $1}
             
 ;
@@ -193,8 +189,6 @@ INSTRUCCIONMETODO : PRINT {$$ = $1}
             | FORM {$$ = $1}
             | DOM {$$ = $1}
             | SWITCHM {$$ = $1}
-            | COMENTARIO
-            | COMENTARIOMULTI
             | DECLARACION {$$ = $1}
             | ASIGNACION {$$ = $1}
             | IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER PTCOMA {$$ = new Nodo("Sentencia", $1); $$.encontrarNodo($3)}
@@ -212,12 +206,10 @@ INSTRUCCIONFUNCION : PRINT {$$ = $1}
             | FOR2 {$$ = $1}
             | DO2 {$$ = $1}
             | SWITCH2 {$$ = $1}
-            | COMENTARIO
-            | COMENTARIOMULTI
             | DECLARACION {$$ = $1}
             | ASIGNACION {$$ = $1}
             | IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER PTCOMA {$$ = new Nodo("Sentencia", $1); $$.encontrarNodo($3)}
-            
+                
             
             
 ;
@@ -232,8 +224,6 @@ INSTRUCCIONIF: PRINT {$$ = $1}
             | FOR2 {$$ = $1}
             | DO2 {$$ = $1}
             | SWITCH2 {$$ = $1}
-            | COMENTARIO
-            | COMENTARIOMULTI
             |IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER PTCOMA  {$$ = new Nodo("Sentencia", $1); $$.encontrarNodo($3)}
             |DECLARACION {$$ = $1}
             |ASIGNACION {$$ = $1}
@@ -250,8 +240,6 @@ INSTRUCCIONFOR: PRINT {$$ = $1}
             | FOR2 {$$ = $1}
             | DO2 {$$ = $1}
             | SWITCH2 {$$ = $1}
-            | COMENTARIO
-            | COMENTARIOMULTI
             | BREAK PTCOMA { $$ = new Nodo("Sentencia", $1);}
             | CONTINUE PTCOMA { $$ = new Nodo("Sentencia", $1);}
             | IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER PTCOMA {$$ = new Nodo("Sentencia", $1); $$.encontrarNodo($3)}
@@ -271,8 +259,6 @@ INSTRUCCIONSWITCH: PRINT {$$ = $1}
             | FOR2 {$$ = $1}
             | DO2 {$$ = $1}
             | SWITCH2 {$$ = $1}
-            | COMENTARIO
-            | COMENTARIOMULTI
             | BREAK PTCOMA { $$ = new Nodo("Sentencia", $1);}
             |IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER PTCOMA {$$ = new Nodo("Sentencia", $1); $$.encontrarNodo($3)}
             |DECLARACION {$$ = $1}
@@ -285,7 +271,7 @@ LISTAEXPRESION: LISTAEXPRESION COMA EXPRESION  {$$=$1;$$.push($3)}
                 ;
 
 
-FUNCION2: TIPO IDENTIFICADOR PARIZQ PARAMETROS PARDER BLOQUE_INSTRUCCIONESFUNCION {$$=new Nodo("Metodo",$1+" "+$2);$$.encontrarNodo($4);if($6!=null){$$.encontrarNodo($6)};}
+FUNCION2: TIPO IDENTIFICADOR PARIZQ PARAMETROS PARDER BLOQUE_INSTRUCCIONESFUNCION {$$=new Nodo("Funcion",$1+" "+$2);$$.encontrarNodo($4);if($6!=null){$$.encontrarNodo($6)};}
         | TIPO IDENTIFICADOR PARIZQ  PARDER BLOQUE_INSTRUCCIONESFUNCION {$$=new Nodo("Funcion",$1+" "+$2);if($5!=null){$$.encontrarNodo($5)};}
      
     ;
@@ -332,6 +318,7 @@ TIPO : STRING {$$ = $1;}
      ;
 
 DECLARACION : TIPO LISTAID IGUAL EXPRESION PTCOMA {$$=new Nodo("Declaracion",$1); $$.encontrarNodo($2);$$.listaIns.push($4);}
+            | TIPO LISTAID PTCOMA {$$=new Nodo("Declaracion",$1); $$.encontrarNodo($2);}
             ;
 
 
@@ -415,8 +402,6 @@ INSTRUCCIONIFM: PRINT {$$ = $1}
             | FORM  {$$=$1}
             | DOM   {$$=$1}
             | SWITCHM  {$$=$1}
-            | COMENTARIO 
-            | COMENTARIOMULTI
             | IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER PTCOMA {$$ = new Nodo("Sentencia", $1); $$.encontrarNodo($3)}
             | DECLARACION {$$=$1}
             | ASIGNACION {$$=$1}
@@ -446,8 +431,6 @@ INSTRUCCIONFORM: PRINT {$$ = $1}
             | FORM {$$ = $1}
             | DOM {$$ = $1}
             | SWITCHM {$$ = $1}
-            | COMENTARIO
-            | COMENTARIOMULTI
             | BREAK PTCOMA { $$ = new Nodo("Sentencia", $1);}
             | CONTINUE PTCOMA { $$ = new Nodo("Sentencia", $1);}
             | IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER PTCOMA {$$ = new Nodo("Sentencia", $1); $$.encontrarNodo($3)}
@@ -491,8 +474,6 @@ INSTRUCCIONSWITCHM: PRINT {$$ = $1}
             | FORM {$$ = $1}
             | DOM {$$ = $1}
             | SWITCHM {$$ = $1}
-            | COMENTARIO
-            | COMENTARIOMULTI
             | BREAK PTCOMA { $$ = new Nodo("Sentencia", $1);}
             |IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER PTCOMA {$$ = new Nodo("Sentencia", $1); $$.encontrarNodo($3)}
             |DECLARACION {$$ = $1}

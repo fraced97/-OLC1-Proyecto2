@@ -1,5 +1,5 @@
 var textoJson
-function Conn(){
+function Analizar(){
 
     //var texto = document.getElementById("inputTextToSave").value;
     var texto = txtCode.getValue();
@@ -19,6 +19,98 @@ function Conn(){
         }
     }); 
 }
+
+
+
+function Analizar2(){
+
+  //var texto = document.getElementById("inputTextToSave").value;
+  var texto = txtCode2.getValue();
+
+
+
+  console.log(texto);
+  //alert("ENTRO EN CONN");
+  var url='http://localhost:8080/CajaTxt2/';
+
+  $.post(url,{text:texto},function(data,status){
+      if(status.toString()=="success"){
+          alert("El resultado es: "+data.toString());
+          textoJson=data.toString();
+      }else{
+          alert("Error estado de conexion:"+status);
+      }
+  }); 
+}
+
+function AnalisisCopiaC(){
+
+  //var texto = document.getElementById("inputTextToSave").value;
+  var texto = txtCode2.getValue();
+
+
+
+  console.log(texto);
+  //alert("ENTRO EN CONN");
+  var url='http://localhost:8080/CajaTxt21/';
+
+  $.post(url,{text:texto},function(data,status){
+      if(status.toString()=="success"){
+          alert("El resultado es: "+data.toString());
+          ///textoJson=data.toString();
+          document.getElementById("reporteClase").value=data.toString();
+      }else{
+          alert("Error estado de conexion:"+status);
+      }
+  }); 
+}
+function AnalisisCopiaFM(){
+
+  //var texto = document.getElementById("inputTextToSave").value;
+  var texto = txtCode2.getValue();
+
+
+
+  console.log(texto);
+  //alert("ENTRO EN CONN");
+  var url='http://localhost:8080/CajaTxt22/';
+
+  $.post(url,{text:texto},function(data,status){
+      if(status.toString()=="success"){
+          alert("El resultado es: "+data.toString());
+          ///textoJson=data.toString();
+          document.getElementById("reporteFuncion").value=data.toString();
+      }else{
+          alert("Error estado de conexion:"+status);
+      }
+  }); 
+}
+
+
+
+
+function AnalisisCopiaV(){
+
+  //var texto = document.getElementById("inputTextToSave").value;
+  var texto = txtCode2.getValue();
+
+
+
+  console.log(texto);
+  //alert("ENTRO EN CONN");
+  var url='http://localhost:8080/CajaTxt23/';
+
+  $.post(url,{text:texto},function(data,status){
+      if(status.toString()=="success"){
+          alert("El resultado es: "+data.toString());
+          ///textoJson=data.toString();
+          document.getElementById("reporteVariable").value=data.toString();
+      }else{
+          alert("Error estado de conexion:"+status);
+      }
+  }); 
+}
+
 
 function pasarValor(){
     localStorage.setItem("textvalue1",textoJson);

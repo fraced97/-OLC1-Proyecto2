@@ -32,26 +32,57 @@
                     </div>
                     <div class="jumbotron">
                         <input type="file" id="fileToLoad"></input>
-                        <button onclick="loadFileAsText()">Cargar Archivo</button>
+                        <button onclick="cargarArchivo()">Cargar Archivo</button>
                         <textarea class="form-control" id="inputTextToSave" rows="15" style="margin-top: 0px; margin-bottom: 0px;"></textarea>
                         
                         <br>
     
-                        <button type="button" class="btn btn-info" onclick="quitarValor()">Analizar</button>
+                        <button type="button" class="btn btn-info" onclick="quitarValor()">Quitar Envio</button>
     
-                        <button type="button" class="btn btn-info" id="descargar" onclick="pasarValor()"> Descargar</button>
-                        <button type="button" class="btn btn-info" id="Errores" onclick="Conn()"> Errores</button>
+                        <button type="button" class="btn btn-info" id="descargar" onclick="pasarValor()">Enviar AST Carpetas</button>
+                        <button type="button" class="btn btn-info" id="Errores" onclick="Analizar()">Crear AST</button>
                     </div>
+
                     <div class="jumbotron">
-                        <textarea class="form-control" id="segundoTxt" rows="15" style="margin-top: 0px; margin-bottom: 0px;"></textarea>
+                        <Filename to Save As:>
+                            <input id="inputFileNameToSaveAs2"></input>
+                            <button onclick="saveTextAsFile2()">Save Text to File</button>
+                            <input id="rToken"></input>
+                            <input id="rErrores"></input>
+                    </div>
+
+                    <div class="jumbotron">
+                        <input type="file" id="fileToLoad2"></input>
+                        <button onclick="cargarArchivo2()">Cargar Archivo</button>
+                        <textarea class="form-control" id="inputTextToSave2" rows="15" style="margin-top: 0px; margin-bottom: 0px;"></textarea>
+                        <button type="button" class="btn btn-info" onclick="quitarValor()">Quitar Envio</button>
+    
+                        <button type="button" class="btn btn-info" id="descargar2" onclick="pasarValor()">Enviar AST Carpetas</button>
+                        <button type="button" class="btn btn-info" id="Errores2" onclick="Analizar2()">Crear AST</button>
+                        <button type="button" class="btn btn-info" id="Errores3" onclick="AnalisisCopiaC()">Analizar Copia C</button>
+                        <button type="button" class="btn btn-info" id="Errores4" onclick="AnalisisCopiaFM()">Analizar Copia FM</button>
+                        <button type="button" class="btn btn-info" id="Errores4" onclick="AnalisisCopiaV()">Analizar Copia V</button>
                     </div>
                     <div class="jumbotron">
                         <iframe src="http://localhost:8000/prueba"marginwidth="0" marginheight="0" name="ventana_iframe" scrolling="no" border="0" 
                         frameborder="0" width="800" height="600"></iframe>
 
-                        <a href="http://localhost:8000/prueba">PRUEBAAAAA</a>
                     </div>
                 </td>
+                <td>
+                    <div class="jumbotron">
+                        <textarea class="form-control" id="reporteClase" rows="15" style="margin-top: 10px; margin-bottom: 0px;"></textarea>
+                    </div>
+                    <div class="jumbotron">
+                        <textarea class="form-control" id="reporteFuncion" rows="15" style="margin-top: 10px; margin-bottom: 0px;"></textarea>
+                    </div>
+                    <div class="jumbotron">
+                        <textarea class="form-control" id="reporteVariable" rows="15" style="margin-top: 10px; margin-bottom: 0px;"></textarea>
+                    </div>
+
+
+
+                </td>>
                
             </tr>
 
@@ -59,6 +90,11 @@
     
         </div>
         <script>const txtCode = CodeMirror.fromTextArea(inputTextToSave, {
+            lineNumbers: true,
+            mode: "javascript",
+            theme: "the-matrix"
+        });</script>
+        <script>const txtCode2 = CodeMirror.fromTextArea(inputTextToSave2, {
             lineNumbers: true,
             mode: "javascript",
             theme: "the-matrix"

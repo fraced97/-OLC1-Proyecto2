@@ -118,7 +118,7 @@
 
 <<EOF>>                 return 'EOF';
 
-.                       CErrores.Errores.add(new CNodoError.NodoError("Lexico","No se esperaba el caracter: "+yytext,yylineno))
+.                               {CErrores.Errores.add(new CNodoError.NodoError("Lexico","No se esperaba el caracter: "+yytext,yylineno))}
 /lex
 
 /* Asociación de operadores y precedencia */
@@ -139,7 +139,7 @@
 %% /* Definición de la gramática */
 
 INICIO : IMPORTSYCLASES EOF {$$=$1; return $$;} 
-        |error CErrores.Errores.add(new CNodoError.NodoError("Sintactico","No se esperaba el caracter: "+yytext,yylineno))
+        |error {CErrores.Errores.add(new CNodoError.NodoError("Sintactico","No se esperaba el caracter: "+yytext,yylineno))}
 ;
 
 INSTRUCCIONES : INSTRUCCIONES INSTRUCCION 

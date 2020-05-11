@@ -40,32 +40,45 @@ class CopiaClase {
             }
         }
         if (listaNodoAux.length == listaNodoAux2.length) {
-            this.nombreClase = listaNodoAux[0].auxNombre;
-            for (let i = 0; i < listaNodoAux.length; i++) {
-                //if(listaNodoAux2[i]!=null){
-                for (let j = 0; j < listaNodoAux2.length; j++) {
-                    if (JSON.stringify(listaNodoAux[i]) == JSON.stringify(listaNodoAux2[j])) {
-                        if (listaNodoAux[i].auxTipo == "Metodo") {
-                            this.existeCopia = true;
-                            this.nMetodos = this.nMetodos + 1;
+            if (listaNodoAux[0].auxNombre == listaNodoAux2[0].auxNombre) {
+                this.nombreClase = listaNodoAux[0].auxNombre;
+                for (let i = 1; i < listaNodoAux.length; i++) {
+                    //if(listaNodoAux2[i]!=null){
+                    let j;
+                    for (j = 1; j < listaNodoAux2.length; j++) {
+                        if (JSON.stringify(listaNodoAux[i]) == JSON.stringify(listaNodoAux2[j])) {
+                            if (listaNodoAux[i].auxTipo == "Metodo") {
+                                this.existeCopia = true;
+                                this.nMetodos = this.nMetodos + 1;
+                                break;
+                            }
+                            if (listaNodoAux[i].auxTipo == "Funcion") {
+                                this.existeCopia = true;
+                                this.nFunciones = this.nFunciones + 1;
+                                break;
+                            }
+                            if (listaNodoAux[i].auxTipo == "Main") {
+                                this.existeCopia = true;
+                                this.nMetodos = this.nMetodos + 1;
+                                break;
+                            }
                         }
-                        if (listaNodoAux[i].auxTipo == "Funcion") {
-                            this.existeCopia = true;
-                            this.nFunciones = this.nFunciones + 1;
-                        }
-                        if (listaNodoAux[i].auxTipo == "Main") {
-                            this.existeCopia = true;
-                            this.nMetodos = this.nMetodos + 1;
+                        else {
+                            //this.existeCopia=false;
+                            //break;
                         }
                     }
-                    else {
-                        //this.existeCopia=false;
-                        //break;
+                    if (j == listaNodoAux2.length) {
+                        this.existeCopia = false;
+                        break;
+                    }
+                    if (this.nMetodos == 0 && this.nFunciones == 0) {
+                        this.existeCopia = false;
                     }
                 }
-                if (this.nMetodos == 0 && this.nFunciones == 0) {
-                    this.existeCopia = false;
-                }
+            }
+            else {
+                this.existeCopia = false;
             }
             // }
         }

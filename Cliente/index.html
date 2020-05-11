@@ -40,15 +40,18 @@
                         <button type="button" class="btn btn-info" onclick="quitarValor()">Quitar Envio</button>
     
                         <button type="button" class="btn btn-info" id="descargar" onclick="pasarValor()">Enviar AST Carpetas</button>
-                        <button type="button" class="btn btn-info" id="Errores" onclick="Analizar()">Crear AST</button>
+                        <button type="button" class="btn btn-info" id="Analizar" onclick="Analizar()">Crear AST</button>
+                        <button type="button" class="btn btn-info" id="AnalizarErrores" onclick="AnalizarErrores()">Errores</button>
+                        <button type="button" class="btn btn-info" id="Errores" onclick="">Descargar Errores</button>
+
                     </div>
 
                     <div class="jumbotron">
                         <Filename to Save As:>
                             <input id="inputFileNameToSaveAs2"></input>
                             <button onclick="saveTextAsFile2()">Save Text to File</button>
-                            <input id="rToken"></input>
-                            <input id="rErrores"></input>
+                            <input id="rToken2"></input>
+                            <input id="rErrores2"></input>
                     </div>
 
                     <div class="jumbotron">
@@ -58,10 +61,12 @@
                         <button type="button" class="btn btn-info" onclick="quitarValor()">Quitar Envio</button>
     
                         <button type="button" class="btn btn-info" id="descargar2" onclick="pasarValor()">Enviar AST Carpetas</button>
-                        <button type="button" class="btn btn-info" id="Errores2" onclick="Analizar2()">Crear AST</button>
-                        <button type="button" class="btn btn-info" id="Errores3" onclick="AnalisisCopiaC()">Analizar Copia C</button>
-                        <button type="button" class="btn btn-info" id="Errores4" onclick="AnalisisCopiaFM()">Analizar Copia FM</button>
-                        <button type="button" class="btn btn-info" id="Errores4" onclick="AnalisisCopiaV()">Analizar Copia V</button>
+                        <button type="button" class="btn btn-info" id="" onclick="Analizar2()">Crear AST</button>
+                        <button type="button" class="btn btn-info" id="" onclick="AnalisisCopiaC()">Analizar Copia C</button>
+                        <button type="button" class="btn btn-info" id="" onclick="AnalisisCopiaFM()">Analizar Copia FM</button>
+                        <button type="button" class="btn btn-info" id="" onclick="AnalisisCopiaV()">Analizar Copia V</button>
+                        <button type="button" class="btn btn-info" id="AnalizarErrores2" onclick="AnalizarErrores2()">Errores</button>
+                        <button type="button" class="btn btn-info" id="Errores2" onclick="">Descargar Errores</button>
                     </div>
                     <div class="jumbotron">
                         <iframe src="http://localhost:8000/prueba"marginwidth="0" marginheight="0" name="ventana_iframe" scrolling="no" border="0" 

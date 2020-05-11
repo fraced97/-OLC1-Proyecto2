@@ -24,7 +24,7 @@ for(let i = 0; i < 1000; i++){
 jsonGramatica = jsonGramatica.replace('tipo1','id":'+'"'+i.toString()+'",'+'\n \t "tipo');
 }
 
-console.log(jsonGramatica.split("nombre1").join("text").split("listaIns").join("children"));
+//console.log(jsonGramatica.split("nombre1").join("text").split("listaIns").join("children"));
 
 var retornarJson = jsonGramatica.split("nombre1").join("text").split("listaIns").join("children");
 

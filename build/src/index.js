@@ -19,7 +19,7 @@ const CopiaClase_1 = __importDefault(require("../src/CopiaClase"));
 const Nodo_1 = require("../src/ArbolAST/Nodo");
 const CopiaFuncion_1 = __importDefault(require("../src/CopiaFuncion"));
 const CopiaVariable_1 = __importDefault(require("../src/CopiaVariable"));
-//import { Errores } from "./JavaAST/Errores";
+const Errores_1 = require("./ArbolAST/Errores");
 var app = express_1.default();
 app.use(bodyParser.json());
 app.use(cors());
@@ -29,35 +29,69 @@ var NodoPCopia;
 app.post('/Calcular/', function (req, res) {
     var entrada = req.body.text;
     //console.log("@@@@@@@@@@@@"+entrada);
-    var resultado = practica2_1.crearJson(entrada);
+    var resultado;
+    Errores_1.Errores.clear();
     NodoPOriginal = practica2_2.obtenerNodo(entrada);
+    if (Errores_1.Errores.verificarerror() == "Se Detectaron Errores de Compilacion") {
+        resultado = "Existe Errores";
+        //resultado=Errores.geterror();
+    }
+    else {
+        resultado = practica2_1.crearJson(entrada);
+    }
     //console.log("ACMP1T    "+resultado);
     //Errores.clear();
     res.send(resultado);
 });
-app.post('/CajaTxt2/', function (req, res) {
+app.post('/Errores/', function (req, res) {
     var entrada = req.body.text;
-    var resultado = practica2_1.crearJson(entrada);
-    //NodoPCopia=obtenerNodo(entrada);
-    //Errores.clear();
+    var resultado = Errores_1.Errores.geterror();
+    res.send(resultado);
+});
+app.post('/Errores2/', function (req, res) {
+    var entrada = req.body.text;
+    var resultado = Errores_1.Errores.geterror();
     res.send(resultado);
 });
 app.post('/CajaTxt2/', function (req, res) {
     var entrada = req.body.text;
-    var resultado = practica2_1.crearJson(entrada);
-    //Errores.clear();
+    var resultado;
+    Errores_1.Errores.clear();
+    practica2_2.obtenerNodo(entrada);
+    if (Errores_1.Errores.verificarerror() == "Se Detectaron Errores de Compilacion") {
+        resultado = "Existe Errores";
+        //resultado=Errores.geterror();
+    }
+    else {
+        resultado = practica2_1.crearJson(entrada);
+    }
     res.send(resultado);
 });
+/*app.post('/CajaTxt2/', function (req, res) {
+    var entrada=req.body.text;
+    
+    var resultado= crearJson(entrada);
+   
+    //Errores.clear();
+    res.send(resultado);
+});*/
 app.post('/CajaTxt21/', function (req, res) {
     var entrada = req.body.text;
     var resultado;
     //var resultado= crearJson(entrada);
+    Errores_1.Errores.clear();
+    practica2_2.obtenerNodo(entrada);
     if (NodoPOriginal != null) {
-        NodoPCopia = practica2_2.obtenerNodo(entrada);
-        //console.log(NodoPCopia.nombre1+"PROBANDO")
-        var aux = new CopiaClase_1.default();
-        resultado = aux.encontrarClases(NodoPOriginal, NodoPCopia);
-        NodoPCopia = new Nodo_1.Nodo("", "");
+        if (Errores_1.Errores.verificarerror() == "Se Detectaron Errores de Compilacion") {
+            resultado = "Existe Errores";
+        }
+        else {
+            NodoPCopia = practica2_2.obtenerNodo(entrada);
+            //console.log(NodoPCopia.nombre1+"PROBANDO")
+            var aux = new CopiaClase_1.default();
+            resultado = aux.encontrarClases(NodoPOriginal, NodoPCopia);
+            NodoPCopia = new Nodo_1.Nodo("", "");
+        }
     }
     else {
         resultado = "Envie el Archivo Principal";
@@ -69,12 +103,19 @@ app.post('/CajaTxt22/', function (req, res) {
     var entrada = req.body.text;
     var resultado;
     //var resultado= crearJson(entrada);
+    Errores_1.Errores.clear();
+    practica2_2.obtenerNodo(entrada);
     if (NodoPOriginal != null) {
-        NodoPCopia = practica2_2.obtenerNodo(entrada);
-        //console.log(NodoPCopia.nombre1+"PROBANDO")
-        var aux = new CopiaFuncion_1.default();
-        resultado = aux.encontrarMetodo(NodoPOriginal, NodoPCopia);
-        NodoPCopia = new Nodo_1.Nodo("", "");
+        if (Errores_1.Errores.verificarerror() == "Se Detectaron Errores de Compilacion") {
+            resultado = "Existe Errores";
+        }
+        else {
+            NodoPCopia = practica2_2.obtenerNodo(entrada);
+            //console.log(NodoPCopia.nombre1+"PROBANDO")
+            var aux = new CopiaFuncion_1.default();
+            resultado = aux.encontrarMetodo(NodoPOriginal, NodoPCopia);
+            NodoPCopia = new Nodo_1.Nodo("", "");
+        }
     }
     else {
         resultado = "Envie el Archivo Principal";
@@ -86,12 +127,19 @@ app.post('/CajaTxt23/', function (req, res) {
     var entrada = req.body.text;
     var resultado;
     //var resultado= crearJson(entrada);
+    Errores_1.Errores.clear();
+    practica2_2.obtenerNodo(entrada);
     if (NodoPOriginal != null) {
-        NodoPCopia = practica2_2.obtenerNodo(entrada);
-        //console.log(NodoPCopia.nombre1+"PROBANDO")
-        var aux = new CopiaVariable_1.default();
-        resultado = aux.encontrarVariable(NodoPOriginal, NodoPCopia);
-        NodoPCopia = new Nodo_1.Nodo("", "");
+        if (Errores_1.Errores.verificarerror() == "Se Detectaron Errores de Compilacion") {
+            resultado = "Existe Errores";
+        }
+        else {
+            NodoPCopia = practica2_2.obtenerNodo(entrada);
+            //console.log(NodoPCopia.nombre1+"PROBANDO")
+            var aux = new CopiaVariable_1.default();
+            resultado = aux.encontrarVariable(NodoPOriginal, NodoPCopia);
+            NodoPCopia = new Nodo_1.Nodo("", "");
+        }
     }
     else {
         resultado = "Envie el Archivo Principal";

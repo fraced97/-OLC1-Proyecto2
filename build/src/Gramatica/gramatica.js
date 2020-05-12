@@ -236,6 +236,9 @@ break;
 case 145: case 146: case 147: case 148: case 149: case 151: case 152:
 this.$=$$[$0]
 break;
+case 194:
+ this.$ = new Nodo("Primitivo", $$[$0-1]);this.$.listaIns.push($$[$0]);
+break;
 case 195:
  this.$ = new Nodo("Relacional", $$[$0-1]);this.$.listaIns.push($$[$0]);
 break;

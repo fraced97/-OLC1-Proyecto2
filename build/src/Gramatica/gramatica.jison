@@ -488,7 +488,7 @@ INSTRUCCIONSWITCHM: PRINT {$$ = $1}
             ;
 
 
-EXPRESION : MENOS EXPRESION %prec UMENOS	    
+EXPRESION : MENOS EXPRESION %prec UMENOS	    { $$ = new Nodo("Primitivo", $1);$$.listaIns.push($2);} 
           | NOT EXPRESION	          { $$ = new Nodo("Relacional", $1);$$.listaIns.push($2);}       
           | EXPRESION MAS EXPRESION	     {$$= new Nodo("Artimetica",$2);$$.listaIns.push($1);$$.listaIns.push($3);}
           | EXPRESION MENOS EXPRESION     {$$= new Nodo("Artimetica",$2);$$.listaIns.push($1);$$.listaIns.push($3);}

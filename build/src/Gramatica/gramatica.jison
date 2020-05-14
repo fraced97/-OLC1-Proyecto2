@@ -167,8 +167,13 @@ INICIO2: IMPORTSYCLASES {$$= new Nodo("Raiz","Raiz");$$.listaIns.push($1)}
 
 
 
-IMPORTSYCLASES: IMPORT2 CLASE2 {$$=new Nodo("Raiz","Raiz"); $$.encontrarNodo($1);$$.listaIns.push($2);}
-            |CLASE2 {$$ = new Nodo("Raiz","Raiz"); $$.listaIns.push($1);}
+IMPORTSYCLASES: IMPORT2 LISTACLASES {$$=new Nodo("Raiz","Raiz"); $$.encontrarNodo($1);$$.encontrarNodo($2);}
+            |LISTACLASES {$$ = new Nodo("Raiz","Raiz"); $$.encontrarNodo($1);}
+            ;
+
+
+LISTACLASES:LISTACLASES CLASE2 {$$=$1;$$.push($2)}
+            |CLASE2 {$$=[];$$.push($1)}  
             ;
 
 IMPORT2: IMPORT2 IMPORT IDENTIFICADOR PTCOMA {$$=$1;$$.push(new Nodo("Import",$2+" "+$3))}

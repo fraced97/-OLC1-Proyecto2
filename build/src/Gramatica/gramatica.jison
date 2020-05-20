@@ -398,8 +398,8 @@ TIPO : STRING {$$ = $1;}
      | INT {$$ = $1;}
      ;
 
-DECLARACION : TIPO LISTAID IGUAL EXPRESION PTCOMA {$$=new Nodo("Declaracion","Declaracion "+$1); $$.encontrarNodo($2);$$.listaIns.push($4);}
-            | TIPO LISTAID PTCOMA {$$=new Nodo("Declaracion","Declaracion "+$1); $$.encontrarNodo($2);}
+DECLARACION : TIPO LISTAID IGUAL EXPRESION PTCOMA {$$=new Nodo("Declaracion",$1); $$.encontrarNodo($2);$$.listaIns.push($4);}
+            | TIPO LISTAID PTCOMA {$$=new Nodo("Declaracion",$1); $$.encontrarNodo($2);}
             ;
 
 

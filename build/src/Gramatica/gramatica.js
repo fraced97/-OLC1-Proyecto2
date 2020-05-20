@@ -177,10 +177,10 @@ case 152: case 153: case 154: case 155: case 156:
 this.$ = $$[$0];
 break;
 case 157:
-this.$=new Nodo("Declaracion","Declaracion "+$$[$0-4]); this.$.encontrarNodo($$[$0-3]);this.$.listaIns.push($$[$0-1]);
+this.$=new Nodo("Declaracion",$$[$0-4]); this.$.encontrarNodo($$[$0-3]);this.$.listaIns.push($$[$0-1]);
 break;
 case 158:
-this.$=new Nodo("Declaracion","Declaracion "+$$[$0-2]); this.$.encontrarNodo($$[$0-1]);
+this.$=new Nodo("Declaracion",$$[$0-2]); this.$.encontrarNodo($$[$0-1]);
 break;
 case 159:
 this.$=$$[$0-2];this.$.push(new Nodo("Variable",$$[$0]));

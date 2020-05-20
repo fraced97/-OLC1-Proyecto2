@@ -135,7 +135,7 @@ export default class copiaVariable{
                 Resultado= Resultado+ " Nombre Clase: "+ listaClase[v].auxNombre+"\n\n";
             }
         }
-        if(Resultado==""){
+        if(Resultado.startsWith(" Nombre Clase:") || Resultado==""){
             Resultado="No existe Copia";
 
           }else{

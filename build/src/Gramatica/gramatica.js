@@ -177,10 +177,10 @@ case 152: case 153: case 154: case 155: case 156:
 this.$ = $$[$0];
 break;
 case 157:
-this.$=new Nodo("Declaracion",$$[$0-4]); this.$.encontrarNodo($$[$0-3]);this.$.listaIns.push($$[$0-1]);
+this.$=new Nodo("Declaracion","Declaracion "+$$[$0-4]); this.$.encontrarNodo($$[$0-3]);this.$.listaIns.push($$[$0-1]);
 break;
 case 158:
-this.$=new Nodo("Declaracion",$$[$0-2]); this.$.encontrarNodo($$[$0-1]);
+this.$=new Nodo("Declaracion","Declaracion "+$$[$0-2]); this.$.encontrarNodo($$[$0-1]);
 break;
 case 159:
 this.$=$$[$0-2];this.$.push(new Nodo("Variable",$$[$0]));
@@ -189,13 +189,13 @@ case 160:
 this.$=[];this.$.push(new Nodo("Variable",$$[$0]));
 break;
 case 161:
-this.$=new Nodo("Asignacion",$$[$0-3]); this.$.listaIns.push($$[$0-1]);
+this.$=new Nodo("Asignacion","Asignacion "+$$[$0-3]); this.$.listaIns.push($$[$0-1]);
 break;
 case 162:
-this.$ = new Nodo("Asignacion",$$[$0-3]); this.$.listaIns.push(new Nodo("Incremento",$$[$0-2]+$$[$0-1]));
+this.$ = new Nodo("Asignacion","Asignacion "+$$[$0-3]); this.$.listaIns.push(new Nodo("Incremento",$$[$0-2]+$$[$0-1]));
 break;
 case 163:
-this.$ = new Nodo("Asignacion",$$[$0-3]); this.$.listaIns.push(new Nodo("Decremento",$$[$0-2]+$$[$0-1]));
+this.$ = new Nodo("Asignacion","Asignacion "+$$[$0-3]); this.$.listaIns.push(new Nodo("Decremento",$$[$0-2]+$$[$0-1]));
 break;
 case 164: case 165: case 169: case 173: case 198: case 216: case 273: case 293:
  this.$ = new Nodo("Sentencia", $$[$0-2]);this.$.listaIns.push($$[$0-1]); if($$[$0]!=null){this.$.encontrarNodo($$[$0])};

@@ -398,8 +398,8 @@ TIPO : STRING {$$ = $1;}
      | INT {$$ = $1;}
      ;
 
-DECLARACION : TIPO LISTAID IGUAL EXPRESION PTCOMA {$$=new Nodo("Declaracion",$1); $$.encontrarNodo($2);$$.listaIns.push($4);}
-            | TIPO LISTAID PTCOMA {$$=new Nodo("Declaracion",$1); $$.encontrarNodo($2);}
+DECLARACION : TIPO LISTAID IGUAL EXPRESION PTCOMA {$$=new Nodo("Declaracion","Declaracion "+$1); $$.encontrarNodo($2);$$.listaIns.push($4);}
+            | TIPO LISTAID PTCOMA {$$=new Nodo("Declaracion","Declaracion "+$1); $$.encontrarNodo($2);}
             ;
 
 
@@ -411,9 +411,9 @@ LISTAID: LISTAID COMA IDENTIFICADOR {$$=$1;$$.push(new Nodo("Variable",$3));}
 
 
 
-ASIGNACION : IDENTIFICADOR IGUAL EXPRESION PTCOMA {$$=new Nodo("Asignacion",$1); $$.listaIns.push($3);}
-            | IDENTIFICADOR MAS MAS PTCOMA {$$ = new Nodo("Asignacion",$1); $$.listaIns.push(new Nodo("Incremento",$2+$3));}
-            | IDENTIFICADOR MENOS MENOS PTCOMA {$$ = new Nodo("Asignacion",$1); $$.listaIns.push(new Nodo("Decremento",$2+$3));}
+ASIGNACION : IDENTIFICADOR IGUAL EXPRESION PTCOMA {$$=new Nodo("Asignacion","Asignacion "+$1); $$.listaIns.push($3);}
+            | IDENTIFICADOR MAS MAS PTCOMA {$$ = new Nodo("Asignacion","Asignacion "+$1); $$.listaIns.push(new Nodo("Incremento",$2+$3));}
+            | IDENTIFICADOR MENOS MENOS PTCOMA {$$ = new Nodo("Asignacion","Asignacion "+$1); $$.listaIns.push(new Nodo("Decremento",$2+$3));}
     ;
 
 WHILE2 : WHILE CONDICION BLOQUE_INSTRUCCIONESFOR { $$ = new Nodo("Sentencia", $1);$$.listaIns.push($2); if($3!=null){$$.encontrarNodo($3)};}

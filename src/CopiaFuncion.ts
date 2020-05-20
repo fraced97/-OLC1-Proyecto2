@@ -126,7 +126,7 @@ export default class copiaFuncion{
               }
           }
 
-          if(Resultado==""){
+          if(Resultado.startsWith(" Nombre Clase:")||Resultado==""){
             Resultado="No existe Copia";
 
           }else{

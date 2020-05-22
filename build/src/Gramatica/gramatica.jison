@@ -727,7 +727,7 @@ EXPRESION : MENOS EXPRESION %prec UMENOS	    { $$ = new Nodo("Primitivo", $1);$$
           | CARACTER  { $$ = new Nodo("Primitivo", $1);}   
           | IDENTIFICADOR PARIZQ LISTAEXPRESION PARDER 	{$$ = new Nodo("LlamadaFM", $1); $$.encontrarNodo($3)}  
           | IDENTIFICADOR PARIZQ PARDER 		    { $$ = new Nodo("LlamadaFM", $1);}   
-          | IDENTIFICADOR	{ $$ = new Nodo("Variable", $1);}
+          | IDENTIFICADOR	{ $$ = new Nodo("LlamadaVariable", $1);}
           | PARIZQ LISTAEXPRESION PARDER {$$ = new Nodo("Condiciones", "Condiciones"); $$.encontrarNodo($2)}  		          
           	         
           ;

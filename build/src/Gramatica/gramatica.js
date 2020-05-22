@@ -258,7 +258,7 @@ case 335:
  this.$ = new Nodo("LlamadaFM", $$[$0-2]);
 break;
 case 336:
- this.$ = new Nodo("Variable", $$[$0]);
+ this.$ = new Nodo("LlamadaVariable", $$[$0]);
 break;
 case 337:
 this.$ = new Nodo("Condiciones", "Condiciones"); this.$.encontrarNodo($$[$0-1])

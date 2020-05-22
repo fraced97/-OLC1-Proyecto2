@@ -230,7 +230,7 @@ export default class copiaVariable{
                     
                     let auxParametros= new Parametros(TipoFuncion,NombreFuncion);
                     for(var j = 0; j < aux.listaIns[i].listaIns.length; j++){
-                        if(aux.listaIns[i].listaIns[j].tipo1=="Declaracion"){
+                        /*if(aux.listaIns[i].listaIns[j].tipo1=="Declaracion"){
                             for(let k=0; k < aux.listaIns[i].listaIns[j].listaIns.length;k++ ){
                                 if(aux.listaIns[i].listaIns[j].listaIns[k].tipo1=="Variable"){
                                     auxParametros.listaNodoAux.push(aux.listaIns[i].listaIns[j].nombre1+" "+aux.listaIns[i].listaIns[j].listaIns[k].nombre1+"\n ");
@@ -238,7 +238,10 @@ export default class copiaVariable{
                                 
                             }
                             
-                        }
+                        }*/
+
+                        this.recursivo(aux.listaIns[i].listaIns[j],auxParametros.listaNodoAux);
+
                         if(aux.listaIns[i].listaIns[j].tipo1=="Parametros"){
                             auxParametros.listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
                         }
@@ -255,14 +258,8 @@ export default class copiaVariable{
 
                     let auxParametros= new Parametros(TipoFuncion,NombreFuncion);
                     for(var j = 0; j < aux.listaIns[i].listaIns.length; j++){
-                        if(aux.listaIns[i].listaIns[j].tipo1=="Declaracion"){
-                            for(let k=0; k < aux.listaIns[i].listaIns[j].listaIns.length;k++ ){
-                                if(aux.listaIns[i].listaIns[j].listaIns[k].tipo1=="Variable"){
-                                     auxParametros.listaNodoAux.push(aux.listaIns[i].listaIns[j].nombre1+" "+aux.listaIns[i].listaIns[j].listaIns[k].nombre1+"\n ");
-                                }
-                            }
-                            
-                        }
+                       
+                        this.recursivo(aux.listaIns[i].listaIns[j],auxParametros.listaNodoAux);
                         if(aux.listaIns[i].listaIns[j].tipo1=="Parametros"){
                             auxParametros.listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
                         }
@@ -306,14 +303,8 @@ export default class copiaVariable{
                     
                     let auxParametros= new Parametros(TipoFuncion,NombreFuncion);
                     for(var j = 0; j < aux.listaIns[i].listaIns.length; j++){
-                        if(aux.listaIns[i].listaIns[j].tipo1=="Declaracion"){
-                            for(let k=0; k < aux.listaIns[i].listaIns[j].listaIns.length;k++ ){
-                                if(aux.listaIns[i].listaIns[j].listaIns[k].tipo1=="Variable"){
-                                    auxParametros.listaNodoAux.push(aux.listaIns[i].listaIns[j].nombre1+" "+aux.listaIns[i].listaIns[j].listaIns[k].nombre1+"\n ");
-                                }   
-                            }
-                            
-                        }
+                        
+                        this.recursivo(aux.listaIns[i].listaIns[j],auxParametros.listaNodoAux);
                         if(aux.listaIns[i].listaIns[j].tipo1=="Parametros"){
                             auxParametros.listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
                         }
@@ -330,14 +321,8 @@ export default class copiaVariable{
 
                     let auxParametros= new Parametros(TipoFuncion,NombreFuncion);
                     for(var j = 0; j < aux.listaIns[i].listaIns.length; j++){
-                        if(aux.listaIns[i].listaIns[j].tipo1=="Declaracion"){
-                            for(let k=0; k < aux.listaIns[i].listaIns[j].listaIns.length;k++ ){
-                                if(aux.listaIns[i].listaIns[j].listaIns[k].tipo1=="Variable"){
-                                    auxParametros.listaNodoAux.push(aux.listaIns[i].listaIns[j].nombre1+" "+aux.listaIns[i].listaIns[j].listaIns[k].nombre1+"\n ");
-                                }    
-                            }
-                            
-                        }
+                        
+                        this.recursivo(aux.listaIns[i].listaIns[j],auxParametros.listaNodoAux);
                         if(aux.listaIns[i].listaIns[j].tipo1=="Parametros"){
                             auxParametros.listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
                         }
@@ -350,6 +335,36 @@ export default class copiaVariable{
             }
           }
           listaClase2[listaClase2.length-1].listaMF=listaAuxPara2;
+
+    }
+
+    recursivo(nodoAux:Nodo,listaVariable:Array<String>){
+        
+       if(nodoAux.tipo1=="Declaracion"){
+        for(let i=0;i<nodoAux.listaIns.length;i++){
+            if(nodoAux.listaIns[i].tipo1=="Variable"){
+                listaVariable.push(nodoAux.nombre1+" "+nodoAux.listaIns[i].nombre1+"\n");
+            }
+        }
+       }else if(nodoAux.nombre1=="switch"){
+            for(let i=0;i<nodoAux.listaIns.length;i++){
+                if(nodoAux.listaIns[i].nombre1=="case"){
+                    for(let j=0;j<nodoAux.listaIns[i].listaIns.length;j++){
+                        this.recursivo(nodoAux.listaIns[i].listaIns[j],listaVariable);
+                    }
+                }else if(nodoAux.listaIns[i].nombre1=="default"){
+                    for(let j=0;j<nodoAux.listaIns[i].listaIns.length;j++){
+                        this.recursivo(nodoAux.listaIns[i].listaIns[j],listaVariable);
+                    }
+                }
+            }
+        }else if(nodoAux.nombre1=="for"||nodoAux.nombre1=="dowhile"||nodoAux.nombre1=="while"||nodoAux.nombre1=="if"||nodoAux.nombre1=="else"){
+            for(let j=0;j<nodoAux.listaIns.length;j++){
+                this.recursivo(nodoAux.listaIns[j],listaVariable);
+            }
+       }
+
+
 
     }
 

@@ -7,6 +7,7 @@ class Parametros {
         this.TipoFuncion = TipoParametro;
         this.listaNodoAux = [];
         this.existeCopia = false;
+        this.listaParametros = [];
     }
 }
 class auxClase {
@@ -62,22 +63,24 @@ class copiaVariable {
                         let j;
                         for (j = 0; j < listaClase2[r].listaMF.length; j++) {
                             if (listaClase[x].listaMF[i].NombreFuncion == listaClase2[r].listaMF[j].NombreFuncion && listaClase[x].listaMF[i].TipoFuncion == listaClase2[r].listaMF[j].TipoFuncion) {
-                                if (listaClase[x].listaMF[i].listaNodoAux.length != 0) {
-                                    if (listaClase2[r].listaMF[j].listaNodoAux.length != 0) {
-                                        for (let k = 0; k < listaClase[x].listaMF[i].listaNodoAux.length; k++) {
-                                            let p;
-                                            for (p = 0; p < listaClase2[r].listaMF[j].listaNodoAux.length; p++) {
-                                                if (JSON.stringify(listaClase[x].listaMF[i].listaNodoAux[k]) == JSON.stringify(listaClase2[r].listaMF[j].listaNodoAux[p])) {
-                                                    listaClase[x].listaMF[i].existeCopia = true;
-                                                    break;
+                                if (JSON.stringify(listaClase[x].listaMF[i].listaParametros) == JSON.stringify(listaClase2[r].listaMF[j].listaParametros)) {
+                                    if (listaClase[x].listaMF[i].listaNodoAux.length != 0) {
+                                        if (listaClase2[r].listaMF[j].listaNodoAux.length != 0) {
+                                            for (let k = 0; k < listaClase[x].listaMF[i].listaNodoAux.length; k++) {
+                                                let p;
+                                                for (p = 0; p < listaClase2[r].listaMF[j].listaNodoAux.length; p++) {
+                                                    if (JSON.stringify(listaClase[x].listaMF[i].listaNodoAux[k]) == JSON.stringify(listaClase2[r].listaMF[j].listaNodoAux[p])) {
+                                                        listaClase[x].listaMF[i].existeCopia = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if (p == listaClase2[r].listaMF[j].listaNodoAux.length) {
+                                                    listaClase[x].listaMF[i].listaNodoAux.splice(k, 1);
+                                                    k--;
                                                 }
                                             }
-                                            if (p == listaClase2[r].listaMF[j].listaNodoAux.length) {
-                                                listaClase[x].listaMF[i].listaNodoAux.splice(k, 1);
-                                                k--;
-                                            }
+                                            break;
                                         }
-                                        break;
                                     }
                                 }
                             }
@@ -89,7 +92,7 @@ class copiaVariable {
                     listaClase[x].existeCopia = false;
                 }
             }
-            if (r == listaClase2.length - 1) {
+            if (r == listaClase2.length) {
                 break;
             }
         }
@@ -107,11 +110,11 @@ class copiaVariable {
                 Resultado = Resultado + " Nombre Clase: " + listaClase[v].auxNombre + "\n\n";
             }
         }
-        if (Resultado.startsWith(" Nombre Clase:") || Resultado == "") {
+        if (Resultado == "") {
             Resultado = "No existe Copia";
         }
         else {
-            Resultado = "Si Existe Copia\n" + Resultado;
+            Resultado = Resultado;
         }
         return Resultado;
         /*if(NombreClase1==NombreClase2){
@@ -195,6 +198,9 @@ class copiaVariable {
                                 }
                             }
                         }
+                        if (aux.listaIns[i].listaIns[j].tipo1 == "Parametros") {
+                            auxParametros.listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
+                        }
                     }
                     listaAuxPara.push(auxParametros);
                 }
@@ -211,6 +217,9 @@ class copiaVariable {
                                     auxParametros.listaNodoAux.push(aux.listaIns[i].listaIns[j].nombre1 + " " + aux.listaIns[i].listaIns[j].listaIns[k].nombre1 + "\n ");
                                 }
                             }
+                        }
+                        if (aux.listaIns[i].listaIns[j].tipo1 == "Parametros") {
+                            auxParametros.listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
                         }
                     }
                     listaAuxPara.push(auxParametros);
@@ -255,6 +264,9 @@ class copiaVariable {
                                 }
                             }
                         }
+                        if (aux.listaIns[i].listaIns[j].tipo1 == "Parametros") {
+                            auxParametros.listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
+                        }
                     }
                     listaAuxPara2.push(auxParametros);
                 }
@@ -271,6 +283,9 @@ class copiaVariable {
                                     auxParametros.listaNodoAux.push(aux.listaIns[i].listaIns[j].nombre1 + " " + aux.listaIns[i].listaIns[j].listaIns[k].nombre1 + "\n ");
                                 }
                             }
+                        }
+                        if (aux.listaIns[i].listaIns[j].tipo1 == "Parametros") {
+                            auxParametros.listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
                         }
                     }
                     listaAuxPara2.push(auxParametros);

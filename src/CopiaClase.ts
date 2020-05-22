@@ -1,13 +1,20 @@
 import {Nodo} from './ArbolAST/Nodo'
 //import {auxNodo} from './AuxNodo'
+
+
+
+
+
 class auxNodo{
 
     
     auxNombre:string;
     auxTipo:string;
+    listaParametros: Array<String>;
     constructor(auxTipo1:string, auxNombre1:string){
         this.auxNombre=auxNombre1;
         this.auxTipo=auxTipo1;
+        this.listaParametros=[];
     }
 
 }
@@ -125,60 +132,7 @@ export default class CopiaClase{
             resultado="No existe Copia";
           }
           return resultado;
-          /*if(listaNodoClase.length==listaNodoClase2.length){
-            if(listaNodoAux[0].auxNombre==listaNodoAux2[0].auxNombre){
-              this.nombreClase=listaNodoAux[0].auxNombre;
-            for(let i =1;i<listaNodoAux.length;i++){
-                //if(listaNodoAux2[i]!=null){
-                  let j;
-                  for(j=1;j<listaNodoAux2.length;j++){
-                    if(JSON.stringify(listaNodoAux[i])==JSON.stringify(listaNodoAux2[j])){
-                      if(listaNodoAux[i].auxTipo=="Metodo"){
-                          this.existeCopia=true;
-                          this.nMetodos=this.nMetodos+1;
-                          break;
-                      }
-                      if(listaNodoAux[i].auxTipo=="Funcion"){
-                          this.existeCopia=true;
-                          this.nFunciones=this.nFunciones+1;
-                          break;
-                      }
-                      if(listaNodoAux[i].auxTipo=="Main"){
-                          this.existeCopia=true;
-                          this.nMetodos=this.nMetodos+1;
-                          break;
-                      }
-                  }else{
-                      //this.existeCopia=false;
-                      //break;
-                  }
-                  }
-                  if(j==listaNodoAux2.length){
-                    this.existeCopia=false;
-                    break;
-                  }
-                    
-                  if(this.nMetodos==0 && this.nFunciones==0){
-                    this.existeCopia=false;
-                  }
-                }
-            }else{
-              this.existeCopia=false;
-            }
-              
-
-           // }
-          }else{
-            this.existeCopia=false;
-          }
-
-          if(this.existeCopia){
-            resultado = "Si hay copia"+"\n Nombre de la clase: "+this.nombreClase+"\n Cantidad de Funciones: "+this.nFunciones.toString()+"\n Cantidad de Metodos: "+ this.nMetodos
-          return resultado;
-        }else{
-            resultado ="No existe Copia";
-            return resultado;
-          }*/
+        
             
     }
 
@@ -186,10 +140,9 @@ export default class CopiaClase{
       this.nFunciones=0
       this.nMetodos=0;
         for (var i = 0; i < aux.listaIns.length; i++){
-            // look for the entry with a matching `code` value
+            
             if (aux.listaIns[i].tipo1 == "Main" ||aux.listaIns[i].tipo1 == "Funcion" ||aux.listaIns[i].tipo1 == "Metodo"){
-               // we found it
-              // obj[i].name is the matched result
+              
               if(aux.listaIns[i].tipo1 == "Funcion"){
                 this.nFunciones++;
 
@@ -200,7 +153,11 @@ export default class CopiaClase{
               }
                 listaNodoAux.push(new auxNodo(aux.listaIns[i].tipo1,aux.listaIns[i].nombre1));
                 
-                
+                for(var j = 0; j < aux.listaIns[i].listaIns.length; j++){
+                  if(aux.listaIns[i].listaIns[j].tipo1=="Parametros"){
+                    listaNodoAux[listaNodoAux.length-1].listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
+                  }
+              }
 
             }
           }
@@ -212,11 +169,15 @@ export default class CopiaClase{
 
     encontrarMF2(aux:Nodo){
         for (var i = 0; i < aux.listaIns.length; i++){
-            // look for the entry with a matching `code` value
+           
             if (aux.listaIns[i].tipo1 == "Main" ||aux.listaIns[i].tipo1 == "Funcion" ||aux.listaIns[i].tipo1 == "Metodo"){
-               // we found it
-              // obj[i].name is the matched result
+               
                 listaNodoAux2.push(new auxNodo(aux.listaIns[i].tipo1,aux.listaIns[i].nombre1));
+                for(var j = 0; j < aux.listaIns[i].listaIns.length; j++){
+                  if(aux.listaIns[i].listaIns[j].tipo1=="Parametros"){
+                    listaNodoAux2[listaNodoAux2.length-1].listaParametros.push(aux.listaIns[i].listaIns[j].nombre1);
+                  }
+              }
 
             }
           }

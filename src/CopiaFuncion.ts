@@ -83,6 +83,7 @@ export default class copiaFuncion{
               let r
               for(r=0;r<listaClase2.length;r++){
                 if(listaClase[x].auxNombre==listaClase2[r].auxNombre){
+                    //console.log(listaClase[x].auxNombre);
                     listaClase[x].existeCopia=true;
                     for(let i = 0; i < listaClase[x].listaMF.length; i++){
                         for(let j = 0; j < listaClase2[r].listaMF.length; j++){
@@ -101,10 +102,11 @@ export default class copiaFuncion{
                     }
                   break; 
                 }else{
+                    //console.log(listaClase[x].auxNombre+"ELSE");
                     listaClase[x].existeCopia=false;
                 }
               }
-              if(r==listaClase2.length-1){
+              if(r==listaClase2.length){
                 //listaClase[x].existeCopia=false;
                 break;
             }
@@ -126,11 +128,11 @@ export default class copiaFuncion{
               }
           }
 
-          if(Resultado.startsWith(" Nombre Clase:")||Resultado==""){
+          if(Resultado==""){
             Resultado="No existe Copia";
 
           }else{
-            Resultado="Si Existe Copia\n"+Resultado;
+            Resultado=Resultado;
           }
           return Resultado;
 
